@@ -81,7 +81,9 @@ def file_info(dir_path, f):
            , "type"     : get_type(path)
            , "rel_path" : relative_path
            }
-    return callbacks('file_info', data)
+    data = callbacks('file_info', data)
+    del data['path']
+    return data
 
 def get_type(path):
     if os.path.isfile(path):
