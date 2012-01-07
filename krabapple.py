@@ -24,15 +24,26 @@ CALLBACKS = {}
 #-----------------------------------------------------------------------------
 # GET request handlers
 
+@get('/')
+def index():
+    return html_list()
 
+@get('/list/:path#.*#')
+@view('index')
+def html_list(path=''):
+    return {"path" : path}
 
-@get('/list/:path#.+#')
-def list(path=''):
+@get('/json/list/:path#.*#')
+def json_list(path=''):
     path    = os.path.join(ROOT_PATH, path)
     content = [file_info(path, f) for f in os.listdir(path) if is_visible(f)]
     return { "path"   : path
            , "content": content
            }
+@route('/static/:filename')
+def server_static(filename):
+    return static_file(filename, root='static')
+
 #-----------------------------------------------------------------------------
 # Callbacks
 

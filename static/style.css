@@ -1,0 +1,38 @@
+body { 
+    background: #c1c1c1;
+}
+
+a {
+    color  : #0000aa;
+    cursor : pointer;
+    white-space: nowrap;
+}
+
+div {
+    border   : 2px solid black;
+}
+
+div.list {
+    overflow : auto;
+    float    : left;
+}
+
+div.after {
+    border-color: #ff0000;
+}
+
+li:nth-child(even) {
+    background: #d1d1d1;
+}
+
+li:nth-child(odd) {
+    background: #e1e1e1;
+}
+
+li:nth-child(even).hilight {
+    background: #ffffff;
+}
+
+li:nth-child(odd).hilight {
+    background: #ffffff;
+}
