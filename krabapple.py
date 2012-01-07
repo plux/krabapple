@@ -1,9 +1,8 @@
-from bottle import get, route, run, request
-import sys
 import os
 import sys
 import ConfigParser
 
+from bottle import run, get, view, route, static_file
 
 #-----------------------------------------------------------------------------
 # Config
