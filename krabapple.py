@@ -47,6 +47,11 @@ def cb_file_info(data):
         data['ext'] = os.path.splitext(data['path'])[1]
     return data
 
+def callbacks(call, data):
+    for callback in CALLBACKS[call]:
+        data = callback(data)
+    return data
+
 #-----------------------------------------------------------------------------
 # Helpers
 
@@ -64,11 +69,6 @@ def file_info(dir_path, f):
             #           "rel_path" : relative_path
         }
     return callbacks('file_info', file_info)
-
-def callbacks(call, data):
-    for callback in CALLBACKS[call]:
-        data = callback(data)
-    return data
 
 def get_type(path):
     if os.path.isfile(path):
