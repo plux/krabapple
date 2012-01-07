@@ -25,9 +25,6 @@ CALLBACKS = {}
 # GET request handlers
 
 
-@get('/hello/:name')
-def index(name='W'):
-    return '<b>Hello %s!</b>' % name
 
 @get('/list/:path#.+#')
 def list(path=''):
