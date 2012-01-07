@@ -61,14 +61,12 @@ def is_visible(f):
 def file_info(dir_path, f):
     path = os.path.join(dir_path, f)
     relative_path = os.path.relpath(path, ROOT_PATH)
-    file_info = {
-                   "path"     : path,
-                   "name"     : os.path.basename(path),
-            #           "ext"      : os.path.splitext(path)[1],
-            #           "type"     : get_type(path),
-            #           "rel_path" : relative_path
-        }
-    return callbacks('file_info', file_info)
+    data = { "name"     : os.path.basename(path)
+           , "path"     : path
+           , "type"     : get_type(path)
+           , "rel_path" : relative_path
+           }
+    return callbacks('file_info', data)
 
 def get_type(path):
     if os.path.isfile(path):
