@@ -2,7 +2,7 @@ import os
 import sys
 import ConfigParser
 
-from bottle import run, get, view, route, static_file
+from bottle import run, get, view, route, static_file, HTTPError
 
 #-----------------------------------------------------------------------------
 # Config
@@ -39,6 +39,10 @@ def json_list(path=''):
     content = [file_info(path, f) for f in os.listdir(path) if is_visible(f)]
     return { "path"   : path
            , "content": content
+    if not os.path.exists(path):
+        raise HTTPError(404, "Path doesn't exist") # Not found
+    if not os.path.isdir(path):
+        raise HTTPError(403, "Path is not a directory") # Forbidden
            }
 @route('/static/:filename')
 def server_static(filename):
