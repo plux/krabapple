@@ -1,7 +1,6 @@
 $ = jQuery
 
 main = ->
-#  $('#hello').html(window.location.pathname)
   init()
 
 init = ->
@@ -28,9 +27,5 @@ make_link = (item, div) ->
       ).append(item['name'])
   else
     item['name']
-
-test = ->
-  $('#list_view').append($('<div>').html('hej'))
-
 
 $(document).ready(main)

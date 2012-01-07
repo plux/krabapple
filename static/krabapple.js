@@ -1,5 +1,5 @@
 (function() {
-  var $, init, list_directory, main, make_link, test;
+  var $, init, list_directory, main, make_link;
 
   $ = jQuery;
 
@@ -37,10 +37,6 @@
     } else {
       return item['name'];
     }
-  };
-
-  test = function() {
-    return $('#list_view').append($('<div>').html('hej'));
   };
 
   $(document).ready(main);
