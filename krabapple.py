@@ -21,8 +21,9 @@ HOST      = config.get('general', 'host')
 PORT      = config.get('general', 'port')
 CALLBACKS = {}
 
-###---------------------------------------------------------------------------
-### GET request handlers
+#-----------------------------------------------------------------------------
+# GET request handlers
+
 
 @get('/hello/:name')
 def index(name='W'):
@@ -34,9 +35,9 @@ def list(path=''):
     content = [file_info(path, f) for f in os.listdir(path) if is_visible(f)]
     return {"path"   : path,
             "content": content}
+#-----------------------------------------------------------------------------
+# Callbacks
 
-###---------------------------------------------------------------------------
-### Callbacks
 def register_callbacks():
     global CALLBACKS
     CALLBACKS = {"file_info": [cb_file_info]}
@@ -46,8 +47,9 @@ def cb_file_info(data):
         data['ext'] = os.path.splitext(data['path'])[1]
     return data
 
-###---------------------------------------------------------------------------
-### Helpers
+#-----------------------------------------------------------------------------
+# Helpers
+
 def is_visible(f):
     return not f.startswith(".")
         
