@@ -1,8 +1,25 @@
 from bottle import get, route, run, request
 import sys
 import os
+import sys
+import ConfigParser
 
-ROOT_PATH = "/Users/hakan.nilsson/Music/Library/"
+
+#-----------------------------------------------------------------------------
+# Config
+
+# Make proper config handling here instead..
+if len(sys.argv) > 1:
+    config_file = sys.argv[1]
+else:
+    # This will crash if default.conf doesn't exist
+    config_file = 'default.conf'
+config = ConfigParser.ConfigParser()
+config.read(config_file)
+
+ROOT_PATH = os.path.expanduser(config.get('general', 'root_path'))
+HOST      = config.get('general', 'host')
+PORT      = config.get('general', 'port')
 CALLBACKS = {}
 
 ###---------------------------------------------------------------------------
@@ -60,5 +77,11 @@ def get_type(path):
     else:
         return "unknown"
 
-register_callbacks()
-run(reloader=True, host='localhost', port=8080)
+#-----------------------------------------------------------------------------
+# Main
+
+def main():
+    register_callbacks()
+    run(reloader=True, host=HOST, port=PORT)
+
+main()
