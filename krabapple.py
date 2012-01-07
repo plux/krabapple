@@ -1,6 +1,7 @@
 import os
 import sys
 import ConfigParser
+import time
 
 from bottle import run, get, view, route, static_file, HTTPError
 
@@ -43,6 +44,7 @@ def json_list(path=''):
         raise HTTPError(404, "Path doesn't exist") # Not found
     if not os.path.isdir(path):
         raise HTTPError(403, "Path is not a directory") # Forbidden
+    time.sleep(0.3)
            }
 @route('/static/:filename')
 def server_static(filename):
