@@ -57,7 +57,7 @@ def callbacks(call, data):
 
 def is_visible(f):
     return not f.startswith(".")
-        
+
 def file_info(dir_path, f):
     path = os.path.join(dir_path, f)
     relative_path = os.path.relpath(path, ROOT_PATH)
