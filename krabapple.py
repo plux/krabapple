@@ -33,8 +33,9 @@ def index(name='W'):
 def list(path=''):
     path    = os.path.join(ROOT_PATH, path)
     content = [file_info(path, f) for f in os.listdir(path) if is_visible(f)]
-    return {"path"   : path,
-            "content": content}
+    return { "path"   : path
+           , "content": content
+           }
 #-----------------------------------------------------------------------------
 # Callbacks
 
