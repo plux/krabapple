@@ -37,14 +37,14 @@ def html_list(path=''):
 @get('/json/list/:path#.*#')
 def json_list(path=''):
     path    = os.path.join(ROOT_PATH, path)
-    content = [file_info(path, f) for f in os.listdir(path) if is_visible(f)]
-    return { "path"   : path
-           , "content": content
     if not os.path.exists(path):
         raise HTTPError(404, "Path doesn't exist") # Not found
     if not os.path.isdir(path):
         raise HTTPError(403, "Path is not a directory") # Forbidden
     time.sleep(0.3)
+    files   = sorted(os.listdir(path))
+    content = [file_info(path, f) for f in files if is_visible(f)]
+    return {"content": content
            }
 @route('/static/:filename')
 def server_static(filename):
