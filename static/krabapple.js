@@ -34,8 +34,8 @@
         $(this).parent().parent().children().removeClass('hilight');
         return $(this).parent().addClass('hilight');
       }).append(item['name']);
-    } else {
-      return item['name'];
+    } else if (item['type'] === 'file') {
+      return $('<a>').attr('href', '/file/' + item['rel_path']).append(item['name']);
     }
   };
 

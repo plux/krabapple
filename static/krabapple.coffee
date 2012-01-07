@@ -25,7 +25,7 @@ make_link = (item, div) ->
         $(this).parent().parent().children().removeClass('hilight')
         $(this).parent().addClass('hilight')
       ).append(item['name'])
-  else
-    item['name']
+  else if item['type'] is 'file'
+    $('<a>').attr('href', '/file/' + item['rel_path']).append(item['name'])
 
 $(document).ready(main)

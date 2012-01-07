@@ -46,6 +46,18 @@ def json_list(path=''):
     content = [file_info(path, f) for f in files if is_visible(f)]
     return {"content": content
            }
+
+@get('/file/:path#.+#')
+def get_file(path):
+    real_path = os.path.join(ROOT_PATH, path)
+    print real_path
+    if not os.path.exists(real_path):
+        raise HTTPError(404, "File doesn't exist") # Not found
+    if not os.path.isfile(real_path):
+        raise HTTPError(403, "Not a file") # Forbidden
+    return static_file(path, root=ROOT_PATH, download=os.path.basename(path))
+
+
 @route('/static/:filename')
 def server_static(filename):
     return static_file(filename, root='static')
