@@ -42,10 +42,10 @@ def json_list(path=''):
     if not os.path.isdir(path):
         raise HTTPError(403, "Path is not a directory") # Forbidden
     time.sleep(0.3)
-    files   = sorted(os.listdir(path))
+    files   = os.listdir(path)
     content = [file_info(path, f) for f in files if is_visible(f)]
-    return {"content": content
-           }
+    content.sort(key=file_cmp_key)
+    return {"content": content}
 
 @get('/file/:path#.+#')
 def get_file(path):
@@ -105,6 +105,8 @@ def get_type(path):
     else:
         return "unknown"
 
+def file_cmp_key(f):
+    return (f['type'], f['name'])
 #-----------------------------------------------------------------------------
 # Main
 
