@@ -7,7 +7,10 @@
   <script type="text/javascript" src="/static/krabapple.js"></script>
 </head>
 <body>
-  <div id="list_view">
+  <div>
+    <a id="back_button">back</a> |
+    <a id="fwd_button">forward</a>
   </div>
+  <div id="list_view"></div>
 </body>
 </html>
