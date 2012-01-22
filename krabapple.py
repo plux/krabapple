@@ -2,6 +2,7 @@ import os
 import sys
 import ConfigParser
 import time
+import mimetypes
 
 from bottle import run, get, view, route, static_file, HTTPError
 
@@ -55,7 +56,7 @@ def get_file(path):
         raise HTTPError(404, "File doesn't exist") # Not found
     if not os.path.isfile(real_path):
         raise HTTPError(403, "Not a file") # Forbidden
-    return static_file(path, root=ROOT_PATH, download=os.path.basename(path))
+    return static_file(path, root=ROOT_PATH, download=True)
 
 
 @route('/static/:filename')
@@ -107,11 +108,20 @@ def get_type(path):
 
 def file_cmp_key(f):
     return (f['type'], f['name'])
+
+def register_mimetypes():
+    # TODO: Read mimetypes from config
+    custom_types = [('txt/x-nfo', '.nfo')]
+    for (mimetype, ext) in custom_types:
+        mimetypes.add_type(mimetype, ext)
+
 #-----------------------------------------------------------------------------
 # Main
 
 def main():
     register_callbacks()
+    register_mimetypes()
+    mimetypes.add_type("text/x-nfo", ".nfo")
     run(reloader=True, host=HOST, port=PORT)
 
 main()
