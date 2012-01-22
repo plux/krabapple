@@ -51,7 +51,6 @@
         list.append($('<li>').html(make_link(item, list_div)));
       }
       visible_panes = get_visible_panes();
-      console.log(visible_panes.length);
       if (visible_panes.length >= MAX_VISIBLE) {
         visible_panes.first().fadeOut(100).addClass('hidden_left');
       }
