@@ -1,38 +1,49 @@
-body { 
+html { 
+    height: 100%;
+}
+
+body {
     background: #c1c1c1;
+    margin: 0;
+    padding: 0;
+    height: 100%;
 }
 
 a {
-    color  : #0000aa;
-    cursor : pointer;
+    color      : #0000aa;
+    cursor     : pointer;
+}
+
+li {
     white-space: nowrap;
 }
 
 div {
-    border   : 2px solid black;
+    border : 1px solid black;
+    margin: 0;
 }
 
 div.list {
-    overflow : auto;
+    width    : 32%;
     float    : left;
+    overflow: auto;
+    min-height: 100%;
+    height: 100%
 }
 
-div.after {
-    border-color: #ff0000;
+#list_view {
+    height: 500px;
+    margin: auto;
 }
 
-li:nth-child(even) {
-    background: #d1d1d1;
-}
-
-li:nth-child(odd) {
-    background: #e1e1e1;
-}
-
-li:nth-child(even).hilight {
+li.hilight {
     background: #ffffff;
 }
 
-li:nth-child(odd).hilight {
-    background: #ffffff;
+div.hidden_left {
+    visible: false
+}
+
+div.hiddem_right {
+    visible: false
 }
