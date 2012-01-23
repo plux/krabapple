@@ -9,7 +9,7 @@
   <script type="text/javascript" src="/static/krabapple.js"></script>
 </head>
 <body>
-  <div>
+  <div id="menu">
     <a id="back_button">back</a> |
     <a id="fwd_button">forward</a>
   </div>
