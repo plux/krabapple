@@ -1,9 +1,7 @@
 (function() {
-  var $, MAX_VISIBLE, get_visible_panes, init, init_navigation_button, list_directory, main, make_directory_link, make_file_link, make_link;
+  var $, get_visible_panes, init, init_navigation_button, list_directory, main, make_directory_link, make_file_link, make_link;
 
   $ = jQuery;
-
-  MAX_VISIBLE = 3;
 
   main = function() {
     return init();
@@ -44,7 +42,7 @@
     return $.getJSON('/json' + dir, function(data) {
       var item, list, list_div, visible_panes, _i, _len, _ref;
       list = $('<ul>');
-      list_div = $('<div>').addClass('list');
+      list_div = $('<div>').addClass('pane');
       _ref = data['content'];
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         item = _ref[_i];

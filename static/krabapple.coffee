@@ -1,7 +1,5 @@
 $ = jQuery
 
-MAX_VISIBLE = 3
-
 main = ->
   init()
 
@@ -34,7 +32,7 @@ get_visible_panes = ->
 list_directory = (dir, div) ->
   $.getJSON('/json' + dir, (data) ->
     list = $('<ul>')
-    list_div = $('<div>').addClass('list')
+    list_div = $('<div>').addClass('pane')
     for item in data['content']
       list.append($('<li>').html(make_link(item, list_div)))
     visible_panes = get_visible_panes()

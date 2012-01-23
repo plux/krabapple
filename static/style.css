@@ -23,14 +23,6 @@ div {
     margin: 0;
 }
 
-div.list {
-    width    : 32%;
-    float    : left;
-    overflow: auto;
-    min-height: 100%;
-    height: 100%
-}
-
 #list_view {
     height: 500px;
     margin: auto;

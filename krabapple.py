@@ -4,7 +4,7 @@ import ConfigParser
 import time
 import mimetypes
 
-from bottle import run, get, view, route, static_file, HTTPError
+from bottle import run, get, view, route, static_file, HTTPError, response
 
 #-----------------------------------------------------------------------------
 # Config
@@ -18,9 +18,10 @@ else:
 config = ConfigParser.ConfigParser()
 config.read(config_file)
 
-ROOT_PATH = os.path.expanduser(config.get('general', 'root_path'))
-HOST      = config.get('general', 'host')
-PORT      = config.get('general', 'port')
+ROOT_PATH    = os.path.expanduser(config.get('general', 'root_path'))
+HOST         = config.get('general', 'host')
+PORT         = config.get('general', 'port')
+MAX_VISIBLE  = config.getint('view', 'max_visible')
 CALLBACKS = {}
 
 #-----------------------------------------------------------------------------
@@ -29,6 +30,19 @@ CALLBACKS = {}
 @get('/')
 def index():
     return html_list()
+
+@get('/config.js')
+@view('config.js')
+def configjs():
+    response.content_type = 'text/js'
+    return {'max_visible': MAX_VISIBLE}
+
+@get('/dynamic_style.css')
+@view('dynamic_style.css.tpl')
+def dynamic_style():
+    response.content_type = 'text/css'
+    return {'width': (100/MAX_VISIBLE)-1}
+
 
 @get('/list/:path#.*#')
 @view('index')
@@ -56,7 +70,8 @@ def get_file(path):
         raise HTTPError(404, "File doesn't exist") # Not found
     if not os.path.isfile(real_path):
         raise HTTPError(403, "Not a file") # Forbidden
-    return static_file(path, root=ROOT_PATH, download=True)
+    filename = os.path.basename(path)
+    return static_file(path, root=ROOT_PATH, download=filename)
 
 
 @route('/static/:filename')
