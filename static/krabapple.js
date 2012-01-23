@@ -82,8 +82,7 @@
   make_file_link = function(_pane, _link, item) {
     return {
       text: item['name'],
-      href: '/file/' + item['rel_path'],
-      click: function() {}
+      href: '/file/' + item['rel_path']
     };
   };
 

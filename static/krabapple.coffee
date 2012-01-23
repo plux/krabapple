@@ -66,6 +66,5 @@ make_directory_link = (pane, link, item) ->
 make_file_link = (_pane, _link, item) ->
     text : item['name']
     href : '/file/' + item['rel_path']
-    click: ->
 
 $(document).ready(main)
